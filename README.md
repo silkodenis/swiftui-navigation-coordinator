@@ -28,7 +28,7 @@ The current implementation covers 4 main transitions:
 
 ## Why This Is Interesting
 - The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
-- In addition to the specific task of multi-level return, the `unwind()` function can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. This can be critically important for unidirectional architectures. The `onUnwind()` call will be made before the `onAppear()` call.
+- In addition to the specific task of multi-level return, the `unwind()` can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. This can be critically important for unidirectional architectures. The `onUnwind()` call will always be made before the `onAppear()` call.
 
 ## Usage Examples
 
@@ -124,7 +124,7 @@ But I recommend utilizing the full [infrastructure](https://github.com/silkodeni
 <details open>
 <summary><b>RootView</b></summary>
 
-Configure the App to run with RootView.
+Configure the App to start with `RootView` as the initial view.
 
 ```swift
 import SwiftUI
@@ -231,6 +231,11 @@ extension View {
 }
 ```
 </details>
+
+## Reporting Issues
+
+I welcome any issues you find within the project. If you encounter bugs or have suggestions for improvements, please feel free to create an issue on the GitHub repository. Your feedback helps make the project better for everyone.
+
 
 ## License
 
