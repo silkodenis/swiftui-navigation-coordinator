@@ -11,7 +11,7 @@
 </p>
 
 ## About the Project
-This is my example of an easy-to-use **Navigation Coordinator**, written in just 50 lines of code and built using SwiftUI **NavigationStack** (iOS 16).
+Easy-to-use **Navigation Coordinator**, written in just 50 lines of code and built using the SwiftUI **NavigationStack** (iOS 16).
 
 ## Core Features
 The current implementation covers 4 main transitions:
@@ -27,7 +27,8 @@ The current implementation covers 4 main transitions:
 - Swift 5.7+
 
 ## Why This Is Interesting
-The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
+- The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
+- In addition to the specific task of multi-level return, the `unwind()` function can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. This can be critically important for unidirectional architectures. The `onUnwind()` call will be made before the `onAppear()` call.
 
 ## Usage Examples
 
@@ -114,13 +115,13 @@ struct A: View {
 </details>
 
 ## Using into Your Project
-This is simply an example of a navigation approach. Feel free to take it, modify it, and use it as you see fit.
+Feel free to take it, modify it, and use it as you see fit.
 
-You can simply take the [NavigationCoordinator.swift](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) and use it as you see fit in your project. It is an independent and tested component that manages `NavigationPath`. 
+You can take only the [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) and use it as you see fit in your project. It is an independent and tested component that manages the `NavigationPath`.
 
-Or you can utilize the full [infrastructure](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation) from my example:
+But I recommend utilizing the full [infrastructure](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation) from my example:
 
-<details>
+<details open>
 <summary><b>RootView</b></summary>
 
 Configure the App to run with RootView.
@@ -153,10 +154,10 @@ struct SomeApp: App {
 ```
 </details>
 
-<details>
+<details open>
 <summary><b>Scene</b></summary>
 
-Configure the `Scene` for your project. In the view property, I recommend not using direct View initialization, but instead employing your favorite Dependency Injection pattern, such as 'View Factory', to connect various dependencies to your 'ViewModel' from outside.
+Configure the `Scene` for your project. In the view property, I recommend avoiding direct View initialization. Instead, use your preferred Dependency Injection pattern, such as **View Factory**, to externally connect various dependencies to your **ViewModel**.
 
 ```swift
 import SwiftUI
@@ -202,10 +203,10 @@ extension Screen {
 ```
 </details>
 
-<details>
+<details open>
 <summary><b>UnwindSegueModifier</b></summary>
 
-Finally, add `UnwindViewModifier.swift` to your project.
+Finally, add the `UnwindViewModifier` to your project to implement the `onUnwind()` call in your view, similar to `onAppear()`.
 
 ```swift
 import SwiftUI
@@ -233,4 +234,4 @@ extension View {
 
 ## License
 
-Apache License 2.0 license. See the [LICENSE](https://github.com/silkodenis/swiftui-navigation-coordinator/blob/main/LICENSE) file for details.
+**Apache License 2.0**. See the [LICENSE](https://github.com/silkodenis/swiftui-navigation-coordinator/blob/main/LICENSE) file for details.
