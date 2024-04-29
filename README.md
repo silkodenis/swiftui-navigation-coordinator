@@ -35,7 +35,7 @@ The implementation of the `unwind` transition may be of particular interest to t
 <summary><b>Push</b></summary>
 
 ```swift
-struct B: View {
+struct SomeView: View {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
     var body: some View {
@@ -51,7 +51,7 @@ struct B: View {
 <summary><b>Pop</b></summary>
 
 ```swift
-struct B: View {
+struct SomeView: View {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
     var body: some View {
@@ -67,7 +67,7 @@ struct B: View {
 <summary><b>PopToRoot</b></summary>
 
 ```swift
-struct B: View {
+struct SomeView: View {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
     var body: some View {
