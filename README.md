@@ -11,7 +11,7 @@
 </p>
 
 ## About the Project
-This project provides a lightweight Navigation Coordinator, implemented in just 50 lines of code and using SwiftUI NavigationStack (available in iOS 16 and later).
+This project provides a lightweight Navigation Coordinator, implemented in just 50 lines of code and using SwiftUI NavigationStack (available from iOS 16).
 
 ## Core Features
 The current implementation covers 4 main transitions:
