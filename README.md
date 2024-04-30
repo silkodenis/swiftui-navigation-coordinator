@@ -119,7 +119,7 @@ You can take only the [NavigationCoordinator](https://github.com/silkodenis/swif
 
 But I recommend taking advantage of some [features](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation) from my example:
 
-<details open>
+<details>
 <summary><b>RootView</b></summary>
 
 Configure the App to start with `RootView` as the initial view.
@@ -152,7 +152,7 @@ struct SomeApp: App {
 ```
 </details>
 
-<details open>
+<details>
 <summary><b>Scene</b></summary>
 
 Configure the `Scene` for your project. In the view property, I recommend avoiding direct View initialization. Instead, use your preferred Dependency Injection pattern, such as **View Factory**, to externally connect various dependencies to your **ViewModel**.
@@ -201,7 +201,7 @@ extension Screen {
 ```
 </details>
 
-<details open>
+<details>
 <summary><b>UnwindSegueModifier</b></summary>
 
 Finally, add the `UnwindViewModifier` to your project to implement the `onUnwind()` call in your view, similar to `onAppear()`.
