@@ -94,19 +94,17 @@ struct B: View {
     
     var body: some View {
         Button("pop to A") {
-            coordinator.unwind(to: "A" /*, with: Any?*/)
+            coordinator.unwind(to: "identifier" /*, with: Any?*/)
         }
     }
 }
-```
 
-```swift
 // A View
 // 🟦🟦🅰️
 struct A: View {
     var body: some View {
         VStack {}
-            .onUnwind(segue: "A") /*{ Any? in }*/
+            .onUnwind(segue: "identifier") /*{ Any? in }*/
     }
 }
 ```
