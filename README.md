@@ -234,7 +234,7 @@ extension View {
 
 ## Reporting Issues
 
-I welcome any issues you find within the project. If you encounter bugs or have suggestions for improvements, please feel free to create an issue on the GitHub repository. Your feedback helps make the project better for everyone.
+I welcome any issues you find within the project. If you encounter bugs or have suggestions for improvements, please feel free to create an issue on the GitHub repository.
 
 
 ## License
