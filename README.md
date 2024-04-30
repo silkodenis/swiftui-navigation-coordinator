@@ -23,8 +23,6 @@ The current implementation covers 4 main transitions:
 ## Requirements
 
 - iOS 16.0+
-- Xcode 14.0.x+
-- Swift 5.7+
 
 ## Why This Is Interesting
 - The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
