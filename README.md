@@ -111,8 +111,6 @@ struct A: View {
 </details>
 
 ## Using into Your Project
-Feel free to take it, modify it, and use it as you see fit.
-
 You can take only the [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) and use it as you see fit in your project. It is an independent and tested component that manages the `NavigationPath`.
 
 But I recommend taking advantage of some [features](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation) from my example:
@@ -227,6 +225,8 @@ extension View {
 }
 ```
 </details>
+
+Feel free to take it, modify it, and use it as you see fit.
 
 ## Reporting Issues
 
