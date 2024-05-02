@@ -40,7 +40,7 @@ The current implementation covers 6 main transitions:
 
 ## Why This Is Interesting
 - The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
-- In addition to the specific task of multi-level return, the `unwind()` can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. This can be critically important for unidirectional architectures. The `onUnwind()` call will always be made before the `onAppear()` call.
+- In addition to the specific task of multi-level return, the `unwind()` can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. The `onUnwind()` call will always be made before the `onAppear()` call.
 
 ## Usage Examples
 
@@ -179,14 +179,10 @@ struct A: View {
 </details>
 
 ## Using into Your Project
-You can take only the [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) and use it as you see fit in your project. It is an independent and tested component.
-
-But I recommend taking advantage of some [features](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation) from my example:
+Add [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) to your project.
 
 <details>
-<summary><b>RootView</b></summary>
-
-Configure the App to start with `RootView` as the initial view.
+<summary><b>Configure the App to start with `RootView` as the initial view:</b></summary>
 
 ```swift
 import SwiftUI
@@ -231,9 +227,9 @@ struct SomeApp: App {
 </details>
 
 <details>
-<summary><b>Scene</b></summary>
+<summary><b>Configure the `Scene` for your project.</b></summary>
 
-Configure the `Scene` for your project. In the view property, I recommend avoiding direct View initialization. Instead, use your preferred Dependency Injection pattern, such as **View Factory**, to externally connect various dependencies to your **ViewModel**.
+In the view property, I recommend avoiding direct View initialization. Instead, use your preferred Dependency Injection pattern, such as **View Factory**, to externally connect various dependencies to your **ViewModel**.
 
 ```swift
 import SwiftUI
@@ -282,9 +278,9 @@ extension Screen {
 </details>
 
 <details>
-<summary><b>RegisterSegueModifier</b></summary>
+<summary><b>Finally, add the `RegisterSegueModifier` to your project.</b></summary>
 
-Finally, add the `RegisterSegueModifier` to your project to implement the `onUnwind()` and `onDismiss()` calls in your views, similar to how `onAppear()` is used.
+To implement the `onUnwind()` and `onDismiss()` calls in your views, similar to how `onAppear()` is used.
 
 ```swift
 import SwiftUI
