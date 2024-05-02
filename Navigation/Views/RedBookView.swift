@@ -41,17 +41,27 @@ struct RedBookView: View {
     
     var buttons: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Button(".push(.greenBook)") {coordinator.push(.greenBook)}
+            Text("Stack Navigation:").font(.title)
+            
+            Button(".push(.greenBook)") { coordinator.push(.greenBook) }
                 .accessibility(identifier: .pushButton)
             
-            Button(".pop()") { coordinator.pop()}
+            Button(".pop()") { coordinator.pop() }
                 .accessibility(identifier: .popButton)
             
             Button(".unwind(to: .orangeBookSegue)") { coordinator.unwind(to: Screen.orangeBookSegue)}
                 .accessibility(identifier: .unwindButton)
             
-            Button(".popToRoot()") {coordinator.popToRoot()}
+            Button(".popToRoot()") { coordinator.popToRoot() }
                 .accessibility(identifier: .popToRootButton)
+            
+            Text("Modal Presentation:").font(.title)
+            
+            Button(".present(.orangeBook)") { coordinator.present(.orangeBook) }
+                .accessibility(identifier: .presentButton)
+            
+            Button(".dismiss()") { coordinator.dismiss() }
+                .accessibility(identifier: .dismissButton)
         }
         .foregroundColor(.white)
         .bold()

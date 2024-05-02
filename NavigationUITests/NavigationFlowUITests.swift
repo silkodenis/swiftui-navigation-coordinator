@@ -58,22 +58,22 @@ final class NavigationFlowUITests: XCTestCase {
     }
     
     // .push(.blueBook(text: "🖼️"))
-    func testBlueBookTitle() throws {
+    func testPushingWithValue() throws {
         navigateToNextScreen()  // To Red
         navigateToNextScreen()  // To Green
         navigateToNextScreen()  // To Blue
         verifyTitle(expectedTitle: "🖼️")
     }
     
-    // .unwind(to: Screen.orangeBookSegue)
+    // .unwind(to: .orangeBookSegue)
     func testUnwindToOrangeBook() throws {
         navigateToNextScreen()  // To Red
         verifyNavigationBarTitle(expectedTitle: "📕")
         unwindToScreenWith(expectedTitle: "📙")
     }
     
-    // .unwind(to: Screen.redBookSegue, with: "🔭")
-    func testUnwindToRedBook() throws {
+    // .unwind(to: .redBookSegue, with: "🔭")
+    func testUnwindToRedBookWithValue() throws {
         navigateToNextScreen()  // To Red
         navigateToNextScreen()  // To Green
         navigateToNextScreen()  // To Blue
@@ -82,34 +82,102 @@ final class NavigationFlowUITests: XCTestCase {
         verifyTitle(expectedTitle: "🔭")
     }
     
+    func testPresentingModalScreen() throws {
+        navigateToNextScreen()  // To Red
+        presentModalScreen()
+        verifyNavigationBarTitle(expectedTitle: "📙")
+        verifyNavigationBarTitle(expectedTitle: "📕")
+    }
+    
+    func testDismissingModalScreen() throws {
+        navigateToNextScreen()  // To Red
+        presentModalScreen()
+        verifyNavigationBarTitle(expectedTitle: "📕")
+        verifyNavigationBarTitle(expectedTitle: "📙")
+        dismissModalScreen()
+        verifyNavigationBarTitle(expectedTitle: "📕")
+        verifyNavigationBarTitleDoesNotExist(expectedTitle: "📙")
+    }
+    
+    func testDismissingModalScreenWithValue() throws {
+        navigateToNextScreen()  // To Red
+        navigateToNextScreen()  // To Green
+        navigateToNextScreen()  // To Blue
+        verifyTitle(expectedTitle: "🖼️")
+        presentModalScreen()
+        verifyNavigationBarTitle(expectedTitle: "📘")
+        verifyNavigationBarTitle(expectedTitle: "📙")
+        navigateToNextScreen()  // To Red
+        navigateToNextScreen()  // To Green
+        navigateToNextScreen()  // To Blue
+        dismissModalScreen() // .dismiss(to: .blueDismiss, with: "🧸")
+        verifyNavigationBarTitle(expectedTitle: "📘")
+        verifyNavigationBarTitleDoesNotExist(expectedTitle: "📙")
+        verifyTitle(expectedTitle: "🖼️🧸")
+    }
+    
     // MARK: - Navigation Helpers
     
+    private func presentModalScreen() {
+        let presentButton = app.buttons[AccessibilityID.presentButton.rawValue]
+        XCTAssertTrue(presentButton.waitForExistence(timeout: 5),
+                      "Present button should exist on the screen before tapping")
+        presentButton.tap()
+    }
+    
+    private func dismissModalScreen() {
+        let dismissButtons = app.buttons.matching(identifier: AccessibilityID.dismissButton.rawValue)
+        guard let visibleDismissButton = (dismissButtons.allElementsBoundByIndex.filter { $0.isHittable }).first else {
+            XCTFail("No visible dismiss button found")
+            return
+        }
+        XCTAssertTrue(visibleDismissButton.waitForExistence(timeout: 5),
+                      "Visible dismiss button should exist on the screen before tapping")
+        visibleDismissButton.tap()
+    }
+    
     private func navigateToNextScreen() {
-        let pushButton = app.buttons[AccessibilityID.pushButton.rawValue]
-        XCTAssertTrue(pushButton.waitForExistence(timeout: 5), 
-                      "Push button should exist on the screen before tapping")
-        pushButton.tap()
+        let pushButtons = app.buttons.matching(identifier: AccessibilityID.pushButton.rawValue)
+        guard let visiblePushButton = (pushButtons.allElementsBoundByIndex.filter { $0.isHittable }).first else {
+            XCTFail("No visible push button found")
+            return
+        }
+        XCTAssertTrue(visiblePushButton.waitForExistence(timeout: 5),
+                      "Visible push button should exist on the screen before tapping")
+        visiblePushButton.tap()
     }
     
     private func navigateToPreviousScreen() {
-        let popButton = app.buttons[AccessibilityID.popButton.rawValue]
-        XCTAssertTrue(popButton.waitForExistence(timeout: 5), 
-                      "Pop button should exist on the screen before tapping")
-        popButton.tap()
+        let popButtons = app.buttons.matching(identifier: AccessibilityID.popButton.rawValue)
+        guard let visiblePopButton = (popButtons.allElementsBoundByIndex.filter { $0.isHittable }).first else {
+            XCTFail("No visible pop button found")
+            return
+        }
+        XCTAssertTrue(visiblePopButton.waitForExistence(timeout: 5),
+                      "Visible pop button should exist on the screen before tapping")
+        visiblePopButton.tap()
     }
     
     private func navigateToRootScreen() {
-        let popToRootButton = app.buttons[AccessibilityID.popToRootButton.rawValue]
-        XCTAssertTrue(popToRootButton.waitForExistence(timeout: 5), 
-                      "PopToRoot button should exist on the screen before tapping")
-        popToRootButton.tap()
+        let popToRootButtons = app.buttons.matching(identifier: AccessibilityID.popToRootButton.rawValue)
+        guard let visiblePopToRootButton = (popToRootButtons.allElementsBoundByIndex.filter { $0.isHittable }).first else {
+            XCTFail("No visible PopToRoot button found")
+            return
+        }
+        XCTAssertTrue(visiblePopToRootButton.waitForExistence(timeout: 5),
+                      "Visible PopToRoot button should exist on the screen before tapping")
+        visiblePopToRootButton.tap()
     }
     
     private func unwindToScreenWith(expectedTitle: String) {
-        let unwindButton = app.buttons[AccessibilityID.unwindButton.rawValue]
-        XCTAssertTrue(unwindButton.waitForExistence(timeout: 5),
-                      "Unwind button should exist on the screen before tapping")
-        unwindButton.tap()
+        let unwindButtons = app.buttons.matching(identifier: AccessibilityID.unwindButton.rawValue)
+        guard let visibleUnwindButton = (unwindButtons.allElementsBoundByIndex.filter { $0.isHittable }).first else {
+            XCTFail("No visible unwind button found")
+            return
+        }
+        XCTAssertTrue(visibleUnwindButton.waitForExistence(timeout: 5),
+                      "Visible unwind button should exist on the screen before tapping")
+        visibleUnwindButton.tap()
         verifyNavigationBarTitle(expectedTitle: expectedTitle)
     }
 
@@ -118,6 +186,13 @@ final class NavigationFlowUITests: XCTestCase {
         let exists = navigationBar.waitForExistence(timeout: 5)
         XCTAssertTrue(exists, "Navigation bar should be \"\(expectedTitle)\"")
     }
+    
+    private func verifyNavigationBarTitleDoesNotExist(expectedTitle: String) {
+        let navigationBar = app.navigationBars[expectedTitle]
+        let exists = navigationBar.waitForExistence(timeout: 5)
+        XCTAssertFalse(exists, "Navigation bar should not be \"\(expectedTitle)\"")
+    }
+
     
     private func verifyTitle(expectedTitle: String) {
         let titleText = app.staticTexts[AccessibilityID.titleText.rawValue]

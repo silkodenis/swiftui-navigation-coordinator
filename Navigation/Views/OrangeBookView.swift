@@ -28,12 +28,24 @@ struct OrangeBookView: View {
             }
         }
     }
-    
+
     var buttons: some View {
-        Button(".push(.redBook)") { coordinator.push(.redBook) }
-            .accessibility(identifier: .pushButton)
-            .foregroundColor(.white)
-            .bold()
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Stack Navigation:").font(.title)
+            
+            Button(".push(.redBook)") { coordinator.push(.redBook) }
+                .accessibility(identifier: .pushButton)
+            
+            Text("Modal Presentation:").font(.title)
+            
+            Button(".present(.orangeBook)") { coordinator.present(.orangeBook) }
+                .accessibility(identifier: .presentButton)
+            
+            Button(".dismiss()") { coordinator.dismiss() }
+                .accessibility(identifier: .dismissButton)
+        }
+        .foregroundColor(.white)
+        .bold()
     }
     
     var stack: some View {

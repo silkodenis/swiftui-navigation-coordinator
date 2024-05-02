@@ -4,21 +4,35 @@
 ![IOS](https://github.com/silkodenis/swiftui-navigation-coordinator/actions/workflows/ios.yml/badge.svg?branch=main)
 
 <p align="center">
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/orange.png?raw=true" alt="Screenshot 1" width="200"/>
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/red.png?raw=true" alt="Screenshot 2" width="200"/>
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/green.png?raw=true" alt="Screenshot 3" width="200"/>
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/blue.png?raw=true" alt="Screenshot 4" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/orange.png?raw=true" alt="Screenshot 1" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/red.png?raw=true" alt="Screenshot 2" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/green.png?raw=true" alt="Screenshot 3" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/blue.png?raw=true" alt="Screenshot 4" width="200"/>
 </p>
 
 ## About the Project
-This project provides a lightweight Navigation Coordinator, implemented in just 50 lines of code and using SwiftUI NavigationStack (available from iOS 16).
+This project provides a lightweight Navigation Coordinator, using SwiftUI NavigationStack (available from iOS 16).
 
 ## Core Features
-The current implementation covers 4 main transitions:
+The current implementation covers 6 main transitions:
+
+<details open>
+<summary>Stack Navigation:</summary>
+
 - `push` — navigates forward to a new view.
 - `pop` — returns to the previous view.
-- `popToRoot` — returns to the root view.
 - `unwind` — performs a multi-level return.
+- `popToRoot` — returns to the root view.
+
+</details>
+
+<details open>
+<summary>Modal Presentation:</summary>
+
+- `present` — displays a modal view, overlaying it on top of current content.
+- `dismiss` — closes the current modal view and returns to the underlying content.
+
+</details>
 
 ## Requirements
 
@@ -110,8 +124,56 @@ struct A: View {
 
 </details>
 
+<details open>
+<summary><b>Present</b></summary>
+
+```swift
+//                🅱️
+// 🟦🟦🟦🟦🟦🟦🟦🟦🟦🅰️   
+struct A: View {
+    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    
+    var body: some View {
+        Button("present") {
+            coordinator.present(.B)
+        }
+    }
+}
+```
+</details>
+
+<details open>
+<summary><b>Dismiss</b></summary>
+
+```swift
+//                🅱️🟦🟦🟦🟦🆑
+// 🟦🟦🟦🟦🟦🟦🟦🟦🟦🅰️   
+struct CL: View {
+    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    
+    var body: some View {
+        Button("dismiss") {
+            coordinator.dismiss(/*to: "identifier" /*, with: Any?*/*/)
+        }
+    }
+}
+
+// 🟦🟦🟦🟦🟦🟦🟦🟦🟦🅰️   
+struct A: View {
+    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    
+    var body: some View {
+        VStack {}
+            // Not necessary. Only if you need to capture an onDismiss event.
+            .onDismiss(segue: "identifier") /*{ Any? in }*/
+    }
+}
+
+```
+</details>
+
 ## Using into Your Project
-You can take only the [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) and use it as you see fit in your project. It is an independent and tested component that manages the `NavigationPath`.
+You can take only the [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) and use it as you see fit in your project. It is an independent and tested component.
 
 But I recommend taking advantage of some [features](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation) from my example:
 
@@ -124,24 +186,38 @@ Configure the App to start with `RootView` as the initial view.
 import SwiftUI
 
 struct RootView: View {
-    @StateObject private var coordinator = NavigationCoordinator<Screen>()
+    @ObservedObject private var coordinator: NavigationCoordinator<Screen>
+    let root: Screen
+    
+    internal init(_ root: Screen, withParent coordinator: NavigationCoordinator<Screen>? = nil) {
+        self.root = root
+        self.coordinator = NavigationCoordinator<Screen>()
+        self.coordinator.parent = coordinator
+    }
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            Screen.root.view
+            root.view
                 .navigationDestination(for: Screen.self) { screen in
                     screen.view
+                }
+                .sheet(item: $coordinator.modal) { screen in
+                    RootView(screen, withParent: coordinator)
                 }
         }
         .environmentObject(coordinator)
     }
 }
+```
+
+```swift
+import SwiftUI
 
 @main
 struct SomeApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootView(.login)
         }
     }
 }
@@ -165,13 +241,15 @@ enum Screen: Hashable {
     case info
 }
 
+extension Screen: Identifiable {
+    var id: Int { self.hashValue }
+}
+
 extension Screen {
-    static var root: Self {
-        .login
-    }
-    
+    // Dismiss segue identifiers
+    static let detailSegue = "dismissToDetail"
+
     // Unwind segue identifiers
-    
     static let moviesSegue = "unwindToMovies"
 }
 
@@ -198,29 +276,34 @@ extension Screen {
 </details>
 
 <details>
-<summary><b>UnwindSegueModifier</b></summary>
+<summary><b>RegisterSegueModifier</b></summary>
 
-Finally, add the `UnwindViewModifier` to your project to implement the `onUnwind()` call in your view, similar to `onAppear()`.
+Finally, add the `RegisterSegueModifier` to your project to implement the `onUnwind()` and `onDismiss()` calls in your views, similar to how `onAppear()` is used.
 
 ```swift
 import SwiftUI
 
-struct UnwindSegueModifier: ViewModifier {
+struct RegisterSegueModifier: ViewModifier {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
+    let type: NavigationCoordinator<Screen>.Segue.SegueType
     let identifier: String
     let action: ((Any?) -> Void)?
     
     func body(content: Content) -> some View {
         content.onAppear {
-            coordinator.registerSegue(with: identifier, action: action)
+            coordinator.registerSegue(type, with: identifier, action: action)
         }
     }
 }
 
 extension View {
     func onUnwind(segue identifier: String, perform action: ((Any?) -> Void)? = nil) -> some View {
-        modifier(UnwindSegueModifier(identifier: identifier, action: action))
+        modifier(RegisterSegueModifier(type: .unwind, identifier: identifier, action: action))
+    }
+    
+    func onDismiss(segue identifier: String, perform action: ((Any?) -> Void)? = nil) -> some View {
+        modifier(RegisterSegueModifier(type: .dismiss, identifier: identifier, action: action))
     }
 }
 ```

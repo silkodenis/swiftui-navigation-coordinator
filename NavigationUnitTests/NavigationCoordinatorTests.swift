@@ -38,17 +38,37 @@ final class NavigationCoordinatorTests: XCTestCase {
         sut.popToRoot()
         XCTAssertTrue(sut.path.isEmpty, "Path should be empty after popping to root")
     }
+    
+    func testPopOnEmptyPath() throws {
+        sut.pop()
+        XCTAssertTrue(sut.path.isEmpty, "Path should remain empty after pop on empty path")
+    }
+    
+    func testPopToRootOnEmptyPath() throws {
+        sut.popToRoot()
+        XCTAssertTrue(sut.path.isEmpty, "Path should remain empty after popToRoot on empty path")
+    }
+    
+    func testPopToRootRemovesAllSegues() throws {
+        sut.push(1)
+        sut.registerSegue(.unwind, with: "toFirst", action: nil)
+        sut.push(2)
+        sut.registerSegue(.unwind, with: "toSecond", action: nil)
+        sut.popToRoot()
+
+        XCTAssertTrue(sut.segues.isEmpty, "All segues should be removed after popping to root")
+    }
 
     func testUnwind() throws {
         let expectation = self.expectation(description: "Unwind action executed")
         sut.push(1)
-        sut.registerSegue(with: "toFirst", action: { value in
+        sut.registerSegue(.unwind, with: "toFirst", action: { value in
             XCTAssertEqual(value as? Int, 123, "Unwind value should be passed correctly")
             expectation.fulfill()
         })
 
         sut.push(2)
-        sut.registerSegue(with: "toSecond")
+        sut.registerSegue(.unwind, with: "toSecond")
         sut.push(3)
         sut.unwind(to: "toFirst", with: 123)
 
@@ -57,9 +77,9 @@ final class NavigationCoordinatorTests: XCTestCase {
     }
 
     func testRemoveInvalidSegues() throws {
-        sut.registerSegue(with: "toFirst")
+        sut.registerSegue(.unwind, with: "toFirst")
         sut.push(1)
-        sut.registerSegue(with: "toSecond")
+        sut.registerSegue(.unwind, with: "toSecond")
         sut.push(2)
         sut.pop()
 
@@ -71,7 +91,7 @@ final class NavigationCoordinatorTests: XCTestCase {
             XCTAssertEqual(value as? String, "Test", "The action should capture and compare the correct value.")
         }
         
-        sut.registerSegue(with: "initialSegue", action: actionToPerform)
+        sut.registerSegue(.unwind, with: "initialSegue", action: actionToPerform)
         XCTAssertEqual(sut.segues["initialSegue"]?.index, 0, "Segue index should be 0 when path is empty.")
         
         sut.segues["initialSegue"]?.action?("Test")
@@ -79,18 +99,48 @@ final class NavigationCoordinatorTests: XCTestCase {
 
     func testRegisterSegueWithoutAction() throws {
         sut.push(1)
-        sut.registerSegue(with: "nextSegue", action: nil)
+        sut.registerSegue(.unwind, with: "nextSegue", action: nil)
         XCTAssertEqual(sut.segues["nextSegue"]?.index, 1, "Segue index should be 1 after one push.")
         XCTAssertNil(sut.segues["nextSegue"]?.action, "Action should be nil when no action is provided.")
     }
 
     func testRegisterMultipleSegues() throws {
         sut.push(1)
-        sut.registerSegue(with: "firstSegue", action: nil)
+        sut.registerSegue(.unwind, with: "firstSegue", action: nil)
         XCTAssertEqual(sut.segues["firstSegue"]?.index, 1, "Segue index should be 1 after one push.")
         
         sut.push(2)
-        sut.registerSegue(with: "secondSegue", action: nil)
+        sut.registerSegue(.unwind, with: "secondSegue", action: nil)
         XCTAssertEqual(sut.segues["secondSegue"]?.index, 2, "Segue index should be 2 after two pushes.")
+    }
+    
+    func testPresentModal() throws {
+        sut.present(5)
+        XCTAssertEqual(sut.modal, 5, "Modal should be 5 after presentation")
+    }
+    
+    func testDismissWithAction() throws {
+        let childCoordinator = NavigationCoordinator<Int>()
+        childCoordinator.parent = sut
+        
+        var receivedValue: Any?
+        sut.registerSegue(.dismiss, with: "modalDismiss", action: { value in
+            receivedValue = value
+        })
+        
+        sut.present(1)
+
+        childCoordinator.dismiss(to: "modalDismiss", with: "TestValue")
+        XCTAssertNil(sut.modal)
+        XCTAssertEqual(receivedValue as? String, "TestValue")
+    }
+    
+    func testDismissWithParentInteraction() throws {
+        let parent = NavigationCoordinator<Int>()
+        sut.parent = parent
+        parent.present(1)
+        
+        sut.dismiss()
+        XCTAssertNil(parent.modal, "Parent modal should be nil after child dismissal")
     }
 }

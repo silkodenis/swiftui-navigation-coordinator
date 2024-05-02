@@ -23,13 +23,15 @@ enum Screen: Hashable {
     case blueBook(text: String)
 }
 
+extension Screen: Identifiable {
+    var id: Int { self.hashValue }
+}
+
 extension Screen {
-    static var root: Self {
-        .orangeBook
-    }
+    // Dismiss segue identifiers
+    static let blueDismiss = "blueDismiss"
     
     // Unwind segue identifiers
-    
     static let orangeBookSegue = "unwindToOrangeBook"
     static let redBookSegue = "unwindToRedBook"
 }

@@ -16,21 +16,26 @@
 
 import SwiftUI
 
-struct UnwindSegueModifier: ViewModifier {
+struct RegisterSegueModifier: ViewModifier {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
+    let type: NavigationCoordinator<Screen>.Segue.SegueType
     let identifier: String
     let action: ((Any?) -> Void)?
     
     func body(content: Content) -> some View {
         content.onAppear {
-            coordinator.registerSegue(with: identifier, action: action)
+            coordinator.registerSegue(type, with: identifier, action: action)
         }
     }
 }
 
 extension View {
     func onUnwind(segue identifier: String, perform action: ((Any?) -> Void)? = nil) -> some View {
-        modifier(UnwindSegueModifier(identifier: identifier, action: action))
+        modifier(RegisterSegueModifier(type: .unwind, identifier: identifier, action: action))
+    }
+    
+    func onDismiss(segue identifier: String, perform action: ((Any?) -> Void)? = nil) -> some View {
+        modifier(RegisterSegueModifier(type: .dismiss, identifier: identifier, action: action))
     }
 }

@@ -30,6 +30,8 @@ struct GreenBookView: View {
     
     var buttons: some View {
         VStack(alignment: .leading, spacing: 10) {
+            Text("Stack Navigation:").font(.title)
+            
             Button(".push(.blueBook(text: \"🖼️\"))") { coordinator.push(.blueBook(text: "🖼️")) }
                 .accessibility(identifier: .pushButton)
             
@@ -41,6 +43,14 @@ struct GreenBookView: View {
             
             Button(".popToRoot()") { coordinator.popToRoot() }
                 .accessibility(identifier: .popToRootButton)
+            
+            Text("Modal Presentation:").font(.title)
+            
+            Button(".present(.orangeBook)") { coordinator.present(.orangeBook) }
+                .accessibility(identifier: .presentButton)
+            
+            Button(".dismiss()") { coordinator.dismiss() }
+                .accessibility(identifier: .dismissButton)
         }
         .foregroundColor(.white)
         .bold()
