@@ -44,7 +44,7 @@ The current implementation covers 6 main transitions:
 
 ## Usage Examples
 
-<details open>
+<details>
 <summary><b>Push</b></summary>
 
 ```swift
@@ -60,7 +60,7 @@ struct SomeView: View {
 ```
 </details>
 
-<details open>
+<details>
 <summary><b>Pop</b></summary>
 
 ```swift
@@ -76,7 +76,7 @@ struct SomeView: View {
 ```
 </details>
 
-<details open>
+<details>
 <summary><b>PopToRoot</b></summary>
 
 ```swift
@@ -92,7 +92,7 @@ struct SomeView: View {
 ```
 </details>
 
-<details open>
+<details>
 <summary><b>Unwind</b></summary>
 Use a unique identifier for your unwind segues. If a segue becomes no longer relevant, it will be automatically removed from the coordinator. Using `onUnwind()` modifier is completely safe, tested, and does not involve any memory leaks or unintended calls. 
 
@@ -124,7 +124,7 @@ struct A: View {
 
 </details>
 
-<details open>
+<details>
 <summary><b>Present</b></summary>
 
 ```swift
@@ -142,7 +142,7 @@ struct A: View {
 ```
 </details>
 
-<details open>
+<details>
 <summary><b>Dismiss</b></summary>
 
 ```swift
