@@ -182,7 +182,7 @@ struct A: View {
 Add [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) to your project.
 
 <details>
-<summary><b>Configure the App to start with `RootView` as the initial view:</b></summary>
+<summary><b>Configure the App to start with `RootView` as the initial view.</b></summary>
 
 ```swift
 import SwiftUI
