@@ -128,8 +128,10 @@ struct A: View {
 <summary><b>Present</b></summary>
 
 ```swift
-//                🅱️
-// 🟦🟦🟦🟦🟦🟦🟦🟦🟦🅰️   
+/*
+               [B]
+[ ][ ][ ][ ][ ][A]
+*/
 struct A: View {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
@@ -146,8 +148,10 @@ struct A: View {
 <summary><b>Dismiss</b></summary>
 
 ```swift
-//                🅱️🟦🟦🟦🟦🆑
-// 🟦🟦🟦🟦🟦🟦🟦🟦🟦🅰️   
+/*
+               [B][ ][ ][ ][CL]
+[ ][ ][ ][ ][ ][A]
+*/
 struct CL: View {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
@@ -158,7 +162,9 @@ struct CL: View {
     }
 }
 
-// 🟦🟦🟦🟦🟦🟦🟦🟦🟦🅰️   
+/*
+[ ][ ][ ][ ][ ][A]
+*/
 struct A: View {
     @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
     
