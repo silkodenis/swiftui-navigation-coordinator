@@ -38,7 +38,7 @@ struct GreenBookView: View {
             Button(".pop()") { coordinator.pop() }
                 .accessibility(identifier: .popButton)
             
-            Button(".unwind(to: .orangeBookSegue)") { coordinator.unwind(to: Screen.orangeBookSegue) }
+            Button(".unwind(to: .toOrange)") { coordinator.unwind(to: Screen.toOrange) }
                 .accessibility(identifier: .unwindButton)
             
             Button(".popToRoot()") { coordinator.popToRoot() }

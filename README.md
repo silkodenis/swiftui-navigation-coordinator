@@ -189,7 +189,7 @@ import SwiftUI
 
 struct RootView: View {
     @ObservedObject private var coordinator: NavigationCoordinator<Screen>
-    let root: Screen
+    private let root: Screen
     
     internal init(_ root: Screen, withParent coordinator: NavigationCoordinator<Screen>? = nil) {
         self.root = root
@@ -236,18 +236,12 @@ import SwiftUI
 
 // Example
 
-enum Screen: Hashable {
+enum Screen {
     case login
     case movies
     case detail(id: Int)
     case info
-}
-
-extension Screen: Identifiable {
-    var id: Int { self.hashValue }
-}
-
-extension Screen {
+    
     // Dismiss segue identifiers
     static let detailSegue = "dismissToDetail"
 
@@ -255,7 +249,7 @@ extension Screen {
     static let moviesSegue = "unwindToMovies"
 }
 
-extension Screen {
+extension Screen: NavigableScreen {
     // You can set up DI in this property
     @ViewBuilder
     var view: some View {

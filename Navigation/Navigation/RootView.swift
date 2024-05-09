@@ -18,7 +18,7 @@ import SwiftUI
 
 struct RootView: View {
     @ObservedObject private var coordinator: NavigationCoordinator<Screen>
-    let root: Screen
+    private let root: Screen
     
     internal init(_ root: Screen, withParent coordinator: NavigationCoordinator<Screen>? = nil) {
         self.root = root

@@ -13,7 +13,7 @@ struct OrangeBookView: View {
     var body: some View {
         content
             .navigationTitle("📙")
-            .onUnwind(segue: Screen.orangeBookSegue)
+            .onUnwind(segue: Screen.toOrange)
     }
     
     var content: some View {

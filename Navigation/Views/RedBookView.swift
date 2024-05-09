@@ -14,7 +14,7 @@ struct RedBookView: View {
     var body: some View {
         content
             .navigationTitle("📕")
-            .onUnwind(segue: Screen.redBookSegue) { text in
+            .onUnwind(segue: Screen.toRed) { text in
                 guard let text = text as? String else { return }
                 self.text = text
             }
@@ -49,7 +49,7 @@ struct RedBookView: View {
             Button(".pop()") { coordinator.pop() }
                 .accessibility(identifier: .popButton)
             
-            Button(".unwind(to: .orangeBookSegue)") { coordinator.unwind(to: Screen.orangeBookSegue)}
+            Button(".unwind(to: .toOrange)") { coordinator.unwind(to: Screen.toOrange)}
                 .accessibility(identifier: .unwindButton)
             
             Button(".popToRoot()") { coordinator.popToRoot() }

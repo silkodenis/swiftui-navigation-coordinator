@@ -16,7 +16,16 @@
 
 import SwiftUI
 
-final class NavigationCoordinator<V: Hashable>: ObservableObject {
+protocol NavigableScreen: Hashable, Identifiable {
+    associatedtype ContentView: View
+    @ViewBuilder var view: ContentView { get }
+}
+
+extension NavigableScreen {
+    var id: UUID { UUID() }
+}
+
+final class NavigationCoordinator<V: NavigableScreen>: ObservableObject {
     @Published var path = NavigationPath()
     @Published var parent: NavigationCoordinator<V>?
     @Published var modal: V?

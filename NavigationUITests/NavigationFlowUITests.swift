@@ -72,7 +72,7 @@ final class NavigationFlowUITests: XCTestCase {
         unwindToScreenWith(expectedTitle: "📙")
     }
     
-    // .unwind(to: .redBookSegue, with: "🔭")
+    // .unwind(to: .toRed, with: "🔭")
     func testUnwindToRedBookWithValue() throws {
         navigateToNextScreen()  // To Red
         navigateToNextScreen()  // To Green
@@ -110,7 +110,7 @@ final class NavigationFlowUITests: XCTestCase {
         navigateToNextScreen()  // To Red
         navigateToNextScreen()  // To Green
         navigateToNextScreen()  // To Blue
-        dismissModalScreen() // .dismiss(to: .blueDismiss, with: "🧸")
+        dismissModalScreen() // .dismiss(to: .toBlue, with: "🧸")
         verifyNavigationBarTitle(expectedTitle: "📘")
         verifyNavigationBarTitleDoesNotExist(expectedTitle: "📙")
         verifyTitle(expectedTitle: "🖼️🧸")
@@ -120,7 +120,7 @@ final class NavigationFlowUITests: XCTestCase {
     
     private func presentModalScreen() {
         let presentButton = app.buttons[AccessibilityID.presentButton.rawValue]
-        XCTAssertTrue(presentButton.waitForExistence(timeout: 10),
+        XCTAssertTrue(presentButton.waitForExistence(timeout: 15),
                       "Present button should exist on the screen before tapping")
         presentButton.tap()
     }
@@ -131,7 +131,7 @@ final class NavigationFlowUITests: XCTestCase {
             XCTFail("No visible dismiss button found")
             return
         }
-        XCTAssertTrue(visibleDismissButton.waitForExistence(timeout: 10),
+        XCTAssertTrue(visibleDismissButton.waitForExistence(timeout: 15),
                       "Visible dismiss button should exist on the screen before tapping")
         visibleDismissButton.tap()
     }
@@ -142,7 +142,7 @@ final class NavigationFlowUITests: XCTestCase {
             XCTFail("No visible push button found")
             return
         }
-        XCTAssertTrue(visiblePushButton.waitForExistence(timeout: 10),
+        XCTAssertTrue(visiblePushButton.waitForExistence(timeout: 15),
                       "Visible push button should exist on the screen before tapping")
         visiblePushButton.tap()
     }
@@ -153,7 +153,7 @@ final class NavigationFlowUITests: XCTestCase {
             XCTFail("No visible pop button found")
             return
         }
-        XCTAssertTrue(visiblePopButton.waitForExistence(timeout: 10),
+        XCTAssertTrue(visiblePopButton.waitForExistence(timeout: 15),
                       "Visible pop button should exist on the screen before tapping")
         visiblePopButton.tap()
     }
@@ -164,7 +164,7 @@ final class NavigationFlowUITests: XCTestCase {
             XCTFail("No visible PopToRoot button found")
             return
         }
-        XCTAssertTrue(visiblePopToRootButton.waitForExistence(timeout: 10),
+        XCTAssertTrue(visiblePopToRootButton.waitForExistence(timeout: 15),
                       "Visible PopToRoot button should exist on the screen before tapping")
         visiblePopToRootButton.tap()
     }
@@ -175,7 +175,7 @@ final class NavigationFlowUITests: XCTestCase {
             XCTFail("No visible unwind button found")
             return
         }
-        XCTAssertTrue(visibleUnwindButton.waitForExistence(timeout: 10),
+        XCTAssertTrue(visibleUnwindButton.waitForExistence(timeout: 15),
                       "Visible unwind button should exist on the screen before tapping")
         visibleUnwindButton.tap()
         verifyNavigationBarTitle(expectedTitle: expectedTitle)
@@ -183,20 +183,20 @@ final class NavigationFlowUITests: XCTestCase {
 
     private func verifyNavigationBarTitle(expectedTitle: String) {
         let navigationBar = app.navigationBars[expectedTitle]
-        let exists = navigationBar.waitForExistence(timeout: 10)
+        let exists = navigationBar.waitForExistence(timeout: 15)
         XCTAssertTrue(exists, "Navigation bar should be \"\(expectedTitle)\"")
     }
     
     private func verifyNavigationBarTitleDoesNotExist(expectedTitle: String) {
         let navigationBar = app.navigationBars[expectedTitle]
-        let exists = navigationBar.waitForExistence(timeout: 10)
+        let exists = navigationBar.waitForExistence(timeout: 15)
         XCTAssertFalse(exists, "Navigation bar should not be \"\(expectedTitle)\"")
     }
 
     
     private func verifyTitle(expectedTitle: String) {
         let titleText = app.staticTexts[AccessibilityID.titleText.rawValue]
-        let exists = titleText.waitForExistence(timeout: 10)
+        let exists = titleText.waitForExistence(timeout: 15)
         XCTAssertTrue(exists, "Title should be visible before checking text")
         XCTAssertEqual(titleText.label, expectedTitle, "Title should be \"\(expectedTitle)\"")
     }

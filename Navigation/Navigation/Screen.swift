@@ -16,27 +16,19 @@
 
 import SwiftUI
 
-enum Screen: Hashable {
+enum Screen {
     case orangeBook
     case redBook
     case greenBook
     case blueBook(text: String)
-}
-
-extension Screen: Identifiable {
-    var id: Int { self.hashValue }
-}
-
-extension Screen {
-    // Dismiss segue identifiers
-    static let blueDismiss = "blueDismiss"
     
-    // Unwind segue identifiers
-    static let orangeBookSegue = "unwindToOrangeBook"
-    static let redBookSegue = "unwindToRedBook"
+    /// Used to uniquely identify segues that either navigate back to a previous screen or dismiss a modal view.
+    static let toBlue = "toBlue"
+    static let toOrange = "toOrange"
+    static let toRed = "toRed"
 }
 
-extension Screen {
+extension Screen: NavigableScreen {
     @ViewBuilder
     var view: some View {
         switch self {

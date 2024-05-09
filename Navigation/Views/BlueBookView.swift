@@ -15,7 +15,7 @@ struct BlueBookView: View {
     var body: some View {
         content
             .navigationTitle("📘")
-            .onDismiss(segue: Screen.blueDismiss) { value in
+            .onDismiss(segue: Screen.toBlue) { value in
                 guard let value = value as? String else { return }
                 dismissValue = value
             }
@@ -47,8 +47,8 @@ struct BlueBookView: View {
             Button(".pop()") { coordinator.pop() }
                 .accessibility(identifier: .popButton)
             
-            Button(".unwind(to: .redBookSegue, with: \"🔭\")") {
-                coordinator.unwind(to: Screen.redBookSegue, with: "🔭")
+            Button(".unwind(to: .redBook, with: \"🔭\")") {
+                coordinator.unwind(to: Screen.toRed, with: "🔭")
             }.accessibility(identifier: .unwindButton)
             
             Button(".popToRoot()") { coordinator.popToRoot() }
@@ -59,8 +59,8 @@ struct BlueBookView: View {
             Button(".present(.orangeBook)") { coordinator.present(.orangeBook) }
                 .accessibility(identifier: .presentButton)
             
-            Button(".dismiss(to: .blueDismiss, with: \"🧸\")") {
-                coordinator.dismiss(to: Screen.blueDismiss, with: "🧸")
+            Button(".dismiss(to: .toBlue, with: \"🧸\")") {
+                coordinator.dismiss(to: Screen.toBlue, with: "🧸")
             }.accessibility(identifier: .dismissButton)
         }
         .foregroundColor(.white)
