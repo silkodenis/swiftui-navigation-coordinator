@@ -4,10 +4,10 @@
 # SwiftUI Navigation Coordinator
 
 <p align="center">
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/orange.png?raw=true" alt="Screenshot 1" width="200"/>
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/red.png?raw=true" alt="Screenshot 2" width="200"/>
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/green.png?raw=true" alt="Screenshot 3" width="200"/>
-  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots_1_1/blue.png?raw=true" alt="Screenshot 4" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/orange.png?raw=true" alt="Screenshot 1" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/red.png?raw=true" alt="Screenshot 2" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/green.png?raw=true" alt="Screenshot 3" width="200"/>
+  <img src="https://github.com/silkodenis/swiftui-navigation-coordinator/blob/readme_assets/screenshots/blue.png?raw=true" alt="Screenshot 4" width="200"/>
 </p>
 
 ## About the Project
