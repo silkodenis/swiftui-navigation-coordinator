@@ -242,11 +242,9 @@ enum Screen {
     case detail(id: Int)
     case info
     
-    // Dismiss segue identifiers
-    static let detailSegue = "dismissToDetail"
-
-    // Unwind segue identifiers
-    static let moviesSegue = "unwindToMovies"
+    /// Used to uniquely identify segues that either navigate back to a previous screen or dismiss a modal view.
+    static let toDetail = "toDetail"
+    static let toMovies = "toMovies"
 }
 
 extension Screen: NavigableScreen {
