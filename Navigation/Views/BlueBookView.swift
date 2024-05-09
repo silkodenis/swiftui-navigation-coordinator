@@ -47,7 +47,7 @@ struct BlueBookView: View {
             Button(".pop()") { coordinator.pop() }
                 .accessibility(identifier: .popButton)
             
-            Button(".unwind(to: .redBook, with: \"🔭\")") {
+            Button(".unwind(to: .toRed, with: \"🔭\")") {
                 coordinator.unwind(to: Screen.toRed, with: "🔭")
             }.accessibility(identifier: .unwindButton)
             
