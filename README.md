@@ -227,7 +227,7 @@ struct SomeApp: App {
 </details>
 
 <details>
-<summary><b>Configure the `Scene` for your project.</b></summary>
+<summary><b>Configure the `NavigableScreen` for your project.</b></summary>
 
 In the view property, I recommend avoiding direct View initialization. Instead, use your preferred Dependency Injection pattern, such as **View Factory**, to externally connect various dependencies to your **ViewModel**.
 
