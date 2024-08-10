@@ -32,9 +32,9 @@ struct RootView: View {
                 .navigationDestination(for: Screen.self) { screen in
                     screen.view
                 }
-                .sheet(item: $coordinator.modal) { screen in
-                    RootView(screen, withParent: coordinator)
-                }
+        }
+        .sheet(item: $coordinator.modal) { screen in
+            RootView(screen, withParent: coordinator)
         }
         .environmentObject(coordinator)
     }
