@@ -305,6 +305,9 @@ extension View {
 
 Feel free to take it, modify it, and use it as you see fit.
 
+## Examples
+- [SwiftUI App](https://github.com/silkodenis/swiftui-moviesdb-redux-app)
+
 ## Reporting Issues
 
 I welcome any issues you find within the project. If you encounter bugs or have suggestions for improvements, please feel free to create an issue on the GitHub repository.
