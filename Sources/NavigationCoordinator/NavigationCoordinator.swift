@@ -25,20 +25,20 @@ public extension NavigableScreen {
     var id: UUID { UUID() }
 }
 
-public final class NavigationCoordinator<V: NavigableScreen>: ObservableObject {
+public final class NavigationCoordinator<Screen: NavigableScreen>: ObservableObject {
     @Published var path = NavigationPath()
-    @Published var parent: NavigationCoordinator<V>?
-    @Published var modal: V?
+    @Published var parent: NavigationCoordinator<Screen>?
+    @Published var modal: Screen?
     var segues: [Identifier : Segue] = [:]
     
-    public init(parent: NavigationCoordinator<V>? = nil, modal: V? = nil) {
+    public init(parent: NavigationCoordinator<Screen>? = nil, modal: Screen? = nil) {
         self.parent = parent
         self.modal = modal
     }
     
     // MARK: - Stack Navigation
     
-    public func push(_ value: V) {
+    public func push(_ value: Screen) {
         path.append(value)
     }
     
@@ -65,7 +65,7 @@ public final class NavigationCoordinator<V: NavigableScreen>: ObservableObject {
     
     // MARK: - Modal Presentation
     
-    public func present(_ value: V) {
+    public func present(_ value: Screen) {
         modal = value
     }
     
