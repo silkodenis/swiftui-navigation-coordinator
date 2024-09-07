@@ -64,5 +64,5 @@ struct GreenBookView: View {
 #Preview {
     NavigationStack {
         GreenBookView()
-    }.environmentObject(NavigationCoordinator<Screen>())
+    }.environmentObject(Coordinator())
 }

@@ -15,6 +15,7 @@
  */
 
 import SwiftUI
+import NavigationCoordinator
 
 enum Screen {
     case orangeBook
@@ -32,17 +33,10 @@ extension Screen: NavigableScreen {
     @ViewBuilder
     var view: some View {
         switch self {
-        case .orangeBook:
-            OrangeBookView()
-            
-        case .redBook:
-            RedBookView()
-            
-        case .greenBook:
-            GreenBookView()
-            
-        case .blueBook(let text):
-            BlueBookView(text: text)
+        case .orangeBook: OrangeBookView()
+        case .redBook: RedBookView()
+        case .greenBook: GreenBookView()
+        case .blueBook(let text): BlueBookView(text: text)
         }
     }
 }

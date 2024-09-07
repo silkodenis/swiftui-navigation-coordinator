@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,13 +16,11 @@
 		2730D60F2BDFEBEA00DB4FF6 /* RedBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6062BDFEBEA00DB4FF6 /* RedBookView.swift */; };
 		2730D6102BDFEBEA00DB4FF6 /* AccessibilityID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6082BDFEBEA00DB4FF6 /* AccessibilityID.swift */; };
 		2730D6112BDFEBEA00DB4FF6 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6092BDFEBEA00DB4FF6 /* View+Ext.swift */; };
-		2730D6172BDFEC4A00DB4FF6 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6122BDFEC4A00DB4FF6 /* NavigationCoordinator.swift */; };
-		2730D6182BDFEC4A00DB4FF6 /* NavigationStackRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6132BDFEC4A00DB4FF6 /* NavigationStackRootView.swift */; };
 		2730D6192BDFEC4A00DB4FF6 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6142BDFEC4A00DB4FF6 /* Screen.swift */; };
-		2730D61A2BDFEC4A00DB4FF6 /* RegisterSegueModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6152BDFEC4A00DB4FF6 /* RegisterSegueModifier.swift */; };
 		2730D6382BDFEE2000DB4FF6 /* NavigationFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6372BDFEE2000DB4FF6 /* NavigationFlowUITests.swift */; };
 		2730D63A2BDFEE2A00DB4FF6 /* NavigationCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6392BDFEE2A00DB4FF6 /* NavigationCoordinatorTests.swift */; };
 		2730D63B2BDFEE5700DB4FF6 /* AccessibilityID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6082BDFEBEA00DB4FF6 /* AccessibilityID.swift */; };
+		27E81BF42C8CD39B00239737 /* NavigationCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 27E81BF32C8CD39B00239737 /* NavigationCoordinator */; };
 		27EE16C32C8C96C6008A1247 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EE16C22C8C96C6008A1247 /* Types.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,14 +52,12 @@
 		2730D6062BDFEBEA00DB4FF6 /* RedBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedBookView.swift; sourceTree = "<group>"; };
 		2730D6082BDFEBEA00DB4FF6 /* AccessibilityID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityID.swift; sourceTree = "<group>"; };
 		2730D6092BDFEBEA00DB4FF6 /* View+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
-		2730D6122BDFEC4A00DB4FF6 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
-		2730D6132BDFEC4A00DB4FF6 /* NavigationStackRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStackRootView.swift; sourceTree = "<group>"; };
 		2730D6142BDFEC4A00DB4FF6 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
-		2730D6152BDFEC4A00DB4FF6 /* RegisterSegueModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSegueModifier.swift; sourceTree = "<group>"; };
 		2730D61F2BDFEDBC00DB4FF6 /* NavigationUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2730D62C2BDFEDCA00DB4FF6 /* NavigationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2730D6372BDFEE2000DB4FF6 /* NavigationFlowUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationFlowUITests.swift; sourceTree = "<group>"; };
 		2730D6392BDFEE2A00DB4FF6 /* NavigationCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinatorTests.swift; sourceTree = "<group>"; };
+		27E81BF12C8CD38900239737 /* NavigationCoordinator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NavigationCoordinator; sourceTree = "<group>"; };
 		27EE16C22C8C96C6008A1247 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27E81BF42C8CD39B00239737 /* NavigationCoordinator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +90,7 @@
 		2730D5E72BDFEB8A00DB4FF6 = {
 			isa = PBXGroup;
 			children = (
+				27E81BF12C8CD38900239737 /* NavigationCoordinator */,
 				2730D5F22BDFEB8A00DB4FF6 /* Navigation */,
 				2730D6202BDFEDBC00DB4FF6 /* NavigationUnitTests */,
 				2730D62D2BDFEDCA00DB4FF6 /* NavigationUITests */,
@@ -114,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				2730D60A2BDFEBEA00DB4FF6 /* Other */,
-				2730D6162BDFEC4A00DB4FF6 /* Navigation */,
 				2730D6072BDFEBEA00DB4FF6 /* Views */,
 				2730D5F32BDFEB8A00DB4FF6 /* MainApp.swift */,
 				2730D6142BDFEC4A00DB4FF6 /* Screen.swift */,
@@ -153,16 +150,6 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		2730D6162BDFEC4A00DB4FF6 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				2730D6122BDFEC4A00DB4FF6 /* NavigationCoordinator.swift */,
-				2730D6132BDFEC4A00DB4FF6 /* NavigationStackRootView.swift */,
-				2730D6152BDFEC4A00DB4FF6 /* RegisterSegueModifier.swift */,
-			);
-			path = Navigation;
-			sourceTree = "<group>";
-		};
 		2730D6202BDFEDBC00DB4FF6 /* NavigationUnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +182,9 @@
 			dependencies = (
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				27E81BF32C8CD39B00239737 /* NavigationCoordinator */,
+			);
 			productName = Navigation;
 			productReference = 2730D5F02BDFEB8A00DB4FF6 /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -269,6 +259,9 @@
 				Base,
 			);
 			mainGroup = 2730D5E72BDFEB8A00DB4FF6;
+			packageReferences = (
+				27E81BF22C8CD39B00239737 /* XCLocalSwiftPackageReference "NavigationCoordinator" */,
+			);
 			productRefGroup = 2730D5F12BDFEB8A00DB4FF6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -313,13 +306,10 @@
 			files = (
 				2730D60D2BDFEBEA00DB4FF6 /* GreenBookView.swift in Sources */,
 				2730D60F2BDFEBEA00DB4FF6 /* RedBookView.swift in Sources */,
-				2730D6172BDFEC4A00DB4FF6 /* NavigationCoordinator.swift in Sources */,
 				27EE16C32C8C96C6008A1247 /* Types.swift in Sources */,
 				2730D6112BDFEBEA00DB4FF6 /* View+Ext.swift in Sources */,
 				2730D5F42BDFEB8A00DB4FF6 /* MainApp.swift in Sources */,
-				2730D61A2BDFEC4A00DB4FF6 /* RegisterSegueModifier.swift in Sources */,
 				2730D6192BDFEC4A00DB4FF6 /* Screen.swift in Sources */,
-				2730D6182BDFEC4A00DB4FF6 /* NavigationStackRootView.swift in Sources */,
 				2730D6102BDFEBEA00DB4FF6 /* AccessibilityID.swift in Sources */,
 				2730D60C2BDFEBEA00DB4FF6 /* BlueBookView.swift in Sources */,
 				2730D60E2BDFEBEA00DB4FF6 /* OrangeBookView.swift in Sources */,
@@ -658,6 +648,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		27E81BF22C8CD39B00239737 /* XCLocalSwiftPackageReference "NavigationCoordinator" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = NavigationCoordinator;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27E81BF32C8CD39B00239737 /* NavigationCoordinator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NavigationCoordinator;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2730D5E82BDFEB8A00DB4FF6 /* Project object */;
 }

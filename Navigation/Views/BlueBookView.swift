@@ -75,5 +75,5 @@ struct BlueBookView: View {
 #Preview {
     NavigationStack {
         BlueBookView(text: "🧸")
-    }.environmentObject(NavigationCoordinator<Screen>())
+    }.environmentObject(Coordinator())
 }

@@ -56,5 +56,5 @@ struct OrangeBookView: View {
 #Preview {
     NavigationStack {
         OrangeBookView()
-    }.environmentObject(NavigationCoordinator<Screen>())
+    }.environmentObject(Coordinator())
 }

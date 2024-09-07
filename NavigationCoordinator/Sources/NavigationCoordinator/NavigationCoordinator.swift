@@ -16,42 +16,47 @@
 
 import SwiftUI
 
-protocol NavigableScreen: Hashable, Identifiable {
+public protocol NavigableScreen: Hashable, Identifiable {
     associatedtype ContentView: View
     @ViewBuilder var view: ContentView { get }
 }
 
-extension NavigableScreen {
+public extension NavigableScreen {
     var id: UUID { UUID() }
 }
 
-final class NavigationCoordinator<V: NavigableScreen>: ObservableObject {
+public final class NavigationCoordinator<V: NavigableScreen>: ObservableObject {
     @Published var path = NavigationPath()
     @Published var parent: NavigationCoordinator<V>?
     @Published var modal: V?
     var segues: [Identifier : Segue] = [:]
     
+    public init(parent: NavigationCoordinator<V>? = nil, modal: V? = nil) {
+        self.parent = parent
+        self.modal = modal
+    }
+    
     // MARK: - Stack Navigation
     
-    func push(_ value: V) {
+    public func push(_ value: V) {
         path.append(value)
     }
     
-    func pop() {
+    public func pop() {
         if !path.isEmpty {
             path.removeLast()
             removeInvalidSegues()
         }
     }
 
-    func popToRoot() {
+    public func popToRoot() {
         if !path.isEmpty {
             path.removeLast(path.count)
             segues.removeAll()
         }
     }
     
-    func unwind(to identifier: Identifier, with value: Any? = nil) {
+    public func unwind(to identifier: Identifier, with value: Any? = nil) {
         guard let segue = segues[identifier], path.count > segue.index, segue.type == .unwind else { return }
         
         path.removeLast(path.count - segue.index)
@@ -60,12 +65,12 @@ final class NavigationCoordinator<V: NavigableScreen>: ObservableObject {
     
     // MARK: - Modal Presentation
     
-    func present(_ value: V) {
+    public func present(_ value: V) {
         modal = value
     }
     
-    func dismiss(to identifier: Identifier? = nil, with value: Any? = nil) {
-        guard let identifier = identifier, let segue = parent?.segues[identifier], 
+    public func dismiss(to identifier: Identifier? = nil, with value: Any? = nil) {
+        guard let identifier = identifier, let segue = parent?.segues[identifier],
                 segue.type == .dismiss else {
             parent?.modal = nil
             return
@@ -76,7 +81,7 @@ final class NavigationCoordinator<V: NavigableScreen>: ObservableObject {
     }
 }
 
-extension NavigationCoordinator {
+public extension NavigationCoordinator {
     typealias Identifier = String
     
     struct Segue {
@@ -84,13 +89,13 @@ extension NavigationCoordinator {
         let index: Int
         let action: ((Any?) -> Void)?
         
-        enum SegueType {
+        public enum SegueType {
             case unwind
             case dismiss
         }
     }
     
-    public func registerSegue(_ type: Segue.SegueType, with identifier: Identifier, action: ((Any?) -> Void)? = nil) {
+    internal func registerSegue(_ type: Segue.SegueType, with identifier: Identifier, action: ((Any?) -> Void)? = nil) {
         segues[identifier] = Segue(type: type, index: path.count, action: action)
     }
     

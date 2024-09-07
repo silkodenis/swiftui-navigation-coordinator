@@ -16,17 +16,17 @@
 
 import SwiftUI
 
-struct NavigationStackRootView<S: NavigableScreen>: View {
+public struct NavigationStackRootView<S: NavigableScreen>: View {
     @ObservedObject private var coordinator: NavigationCoordinator<S>
     private let root: S
     
-    internal init(_ root: S, withParent coordinator: NavigationCoordinator<S>? = nil) {
+    public init(_ root: S, withParent coordinator: NavigationCoordinator<S>? = nil) {
         self.root = root
         self.coordinator = NavigationCoordinator<S>()
         self.coordinator.parent = coordinator
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack(path: $coordinator.path) {
             root.view
                 .navigationDestination(for: S.self) { screen in

@@ -6,10 +6,12 @@
 //
 
 import XCTest
-@testable import Navigation
+import SwiftUI
 @testable import NavigationCoordinator
 
 final class NavigationCoordinatorTests: XCTestCase {
+    typealias Coordinator = NavigationCoordinator<Screen>
+    
     var sut: Coordinator!
 
     override func setUpWithError() throws {
@@ -143,5 +145,15 @@ final class NavigationCoordinatorTests: XCTestCase {
         
         sut.dismiss()
         XCTAssertNil(parent.modal, "Parent modal should be nil after child dismissal")
+    }
+}
+
+extension NavigationCoordinatorTests {
+    enum Screen: NavigableScreen {
+        case orangeBook
+        case redBook
+        case greenBook
+        
+        @ViewBuilder var view: some View { EmptyView() }
     }
 }

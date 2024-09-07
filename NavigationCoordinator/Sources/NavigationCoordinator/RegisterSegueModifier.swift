@@ -16,14 +16,22 @@
 
 import SwiftUI
 
-struct RegisterSegueModifier<S: NavigableScreen>: ViewModifier {
+public struct RegisterSegueModifier<S: NavigableScreen>: ViewModifier {
     @EnvironmentObject var coordinator: NavigationCoordinator<S>
     
     let type: NavigationCoordinator<S>.Segue.SegueType
     let identifier: String
     let action: ((Any?) -> Void)?
     
-    func body(content: Content) -> some View {
+    public init(type: NavigationCoordinator<S>.Segue.SegueType, 
+                identifier: String, 
+                action: ((Any?) -> Void)? = nil) {
+        self.type = type
+        self.identifier = identifier
+        self.action = action
+    }
+    
+    public func body(content: Content) -> some View {
         content.onAppear {
             coordinator.registerSegue(type, with: identifier, action: action)
         }

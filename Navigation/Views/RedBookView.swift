@@ -75,5 +75,5 @@ struct RedBookView: View {
 #Preview {
     NavigationStack {
         RedBookView()
-    }.environmentObject(NavigationCoordinator<Screen>())
+    }.environmentObject(Coordinator())
 }
