@@ -53,7 +53,7 @@ The current implementation covers 6 main transitions:
 
 ## Getting Started
 
-<details>
+<details open>
 <summary><b>1. Configure the NavigableScreen Enum</b></summary>
   
 Start by creating an enum Screen to represent the different screens in your app. Ensure it conforms to the NavigableScreen protocol:
@@ -80,7 +80,7 @@ extension Screen: NavigableScreen {
 ```
 </details>
 
-<details>
+<details open>
 <summary><b>2. Define Typealiases</b></summary>
   
 Define typealias to simplify the usage of the types used with your coordinator:
@@ -94,7 +94,7 @@ typealias RootView = NavigationStackRootView<Screen>
 ```
 </details>
 
-<details>
+<details open>
 <summary><b>3. Configure the App Entry Point</b></summary>
   
 Set up the app entry point using the RootView to define the initial screen:
@@ -115,7 +115,7 @@ struct MainApp: App {
 
 ## Usage Examples
 
-<details>
+<details open>
 <summary><b>Push</b></summary>
 
 ```swift
