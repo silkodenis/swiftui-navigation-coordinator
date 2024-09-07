@@ -119,6 +119,8 @@ struct MainApp: App {
 <summary><b>Push</b></summary>
 
 ```swift
+import SwiftUI
+
 struct LoginView: View {
     @EnvironmentObject var coordinator: Coordinator
     
@@ -135,6 +137,8 @@ struct LoginView: View {
 <summary><b>Pop</b></summary>
 
 ```swift
+import SwiftUI
+
 struct MoviesView: View {
     @EnvironmentObject var coordinator: Coordinator
     
@@ -151,6 +155,8 @@ struct MoviesView: View {
 <summary><b>PopToRoot</b></summary>
 
 ```swift
+import SwiftUI
+
 struct SettingsView: View {
     @EnvironmentObject var coordinator: Coordinator
     
@@ -170,6 +176,8 @@ Use a unique identifier for your unwind segues. If a segue becomes no longer rel
 
 
 ```swift
+import SwiftUI
+
 // B View
 // 🟦🟦🅰🟦🟦🟦🟦🟦🟦🅱️  
 struct B: View {
@@ -199,6 +207,8 @@ struct A: View {
 <summary><b>Present</b></summary>
 
 ```swift
+import SwiftUI
+
 /*
                [B]
 [ ][ ][ ][ ][ ][A]
@@ -219,6 +229,8 @@ struct A: View {
 <summary><b>Dismiss</b></summary>
 
 ```swift
+import SwiftUI
+
 /*
                [B][ ][ ][ ][CL]
 [ ][ ][ ][ ][ ][A]
