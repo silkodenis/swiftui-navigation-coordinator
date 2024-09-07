@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct NavigationApp: App {
+struct MainApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(.orangeBook)

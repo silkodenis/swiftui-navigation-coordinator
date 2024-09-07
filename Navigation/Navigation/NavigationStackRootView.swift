@@ -16,25 +16,25 @@
 
 import SwiftUI
 
-struct RootView: View {
-    @ObservedObject private var coordinator: NavigationCoordinator<Screen>
-    private let root: Screen
+struct NavigationStackRootView<S: NavigableScreen>: View {
+    @ObservedObject private var coordinator: NavigationCoordinator<S>
+    private let root: S
     
-    internal init(_ root: Screen, withParent coordinator: NavigationCoordinator<Screen>? = nil) {
+    internal init(_ root: S, withParent coordinator: NavigationCoordinator<S>? = nil) {
         self.root = root
-        self.coordinator = NavigationCoordinator<Screen>()
+        self.coordinator = NavigationCoordinator<S>()
         self.coordinator.parent = coordinator
     }
     
     var body: some View {
         NavigationStack(path: $coordinator.path) {
             root.view
-                .navigationDestination(for: Screen.self) { screen in
+                .navigationDestination(for: S.self) { screen in
                     screen.view
                 }
         }
         .sheet(item: $coordinator.modal) { screen in
-            RootView(screen, withParent: coordinator)
+            NavigationStackRootView(screen, withParent: coordinator)
         }
         .environmentObject(coordinator)
     }

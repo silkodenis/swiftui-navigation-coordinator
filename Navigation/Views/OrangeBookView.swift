@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrangeBookView: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         content

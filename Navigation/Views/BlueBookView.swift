@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BlueBookView: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    @EnvironmentObject var coordinator: Coordinator
     @State var dismissValue = ""
     let text: String
     

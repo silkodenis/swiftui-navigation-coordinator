@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RedBookView: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    @EnvironmentObject var coordinator: Coordinator
     @State private var text: String = ""
     
     var body: some View {

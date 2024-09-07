@@ -9,10 +9,10 @@ import XCTest
 @testable import Navigation
 
 final class NavigationCoordinatorTests: XCTestCase {
-    var sut: NavigationCoordinator<Screen>!
+    var sut: Coordinator!
 
     override func setUpWithError() throws {
-        sut = NavigationCoordinator<Screen>()
+        sut = Coordinator()
     }
 
     override func tearDownWithError() throws {
@@ -120,7 +120,7 @@ final class NavigationCoordinatorTests: XCTestCase {
     }
     
     func testDismissWithAction() throws {
-        let childCoordinator = NavigationCoordinator<Screen>()
+        let childCoordinator = Coordinator()
         childCoordinator.parent = sut
         
         var receivedValue: Any?
@@ -136,7 +136,7 @@ final class NavigationCoordinatorTests: XCTestCase {
     }
     
     func testDismissWithParentInteraction() throws {
-        let parent = NavigationCoordinator<Screen>()
+        let parent = Coordinator()
         sut.parent = parent
         parent.present(.orangeBook)
         
