@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271C2BFB2C8CE9DC00D746A4 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271C2BF72C8CE9DC00D746A4 /* NavigationCoordinator.swift */; };
+		271C2BFC2C8CE9DC00D746A4 /* NavigationStackRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271C2BF82C8CE9DC00D746A4 /* NavigationStackRootView.swift */; };
+		271C2BFD2C8CE9DC00D746A4 /* RegisterSegueModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271C2BF92C8CE9DC00D746A4 /* RegisterSegueModifier.swift */; };
 		2730D5F42BDFEB8A00DB4FF6 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D5F32BDFEB8A00DB4FF6 /* MainApp.swift */; };
 		2730D5F82BDFEB8C00DB4FF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2730D5F72BDFEB8C00DB4FF6 /* Assets.xcassets */; };
 		2730D5FB2BDFEB8C00DB4FF6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2730D5FA2BDFEB8C00DB4FF6 /* Preview Assets.xcassets */; };
@@ -20,7 +23,6 @@
 		2730D6382BDFEE2000DB4FF6 /* NavigationFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6372BDFEE2000DB4FF6 /* NavigationFlowUITests.swift */; };
 		2730D63A2BDFEE2A00DB4FF6 /* NavigationCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6392BDFEE2A00DB4FF6 /* NavigationCoordinatorTests.swift */; };
 		2730D63B2BDFEE5700DB4FF6 /* AccessibilityID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2730D6082BDFEBEA00DB4FF6 /* AccessibilityID.swift */; };
-		27E81BF42C8CD39B00239737 /* NavigationCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 27E81BF32C8CD39B00239737 /* NavigationCoordinator */; };
 		27EE16C32C8C96C6008A1247 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EE16C22C8C96C6008A1247 /* Types.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		271C2BF72C8CE9DC00D746A4 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
+		271C2BF82C8CE9DC00D746A4 /* NavigationStackRootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStackRootView.swift; sourceTree = "<group>"; };
+		271C2BF92C8CE9DC00D746A4 /* RegisterSegueModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSegueModifier.swift; sourceTree = "<group>"; };
 		2730D5F02BDFEB8A00DB4FF6 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2730D5F32BDFEB8A00DB4FF6 /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
 		2730D5F72BDFEB8C00DB4FF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +62,6 @@
 		2730D62C2BDFEDCA00DB4FF6 /* NavigationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2730D6372BDFEE2000DB4FF6 /* NavigationFlowUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationFlowUITests.swift; sourceTree = "<group>"; };
 		2730D6392BDFEE2A00DB4FF6 /* NavigationCoordinatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinatorTests.swift; sourceTree = "<group>"; };
-		27E81BF12C8CD38900239737 /* NavigationCoordinator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NavigationCoordinator; sourceTree = "<group>"; };
 		27EE16C22C8C96C6008A1247 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27E81BF42C8CD39B00239737 /* NavigationCoordinator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,10 +90,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		271C2BFA2C8CE9DC00D746A4 /* NavigationCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				271C2BF72C8CE9DC00D746A4 /* NavigationCoordinator.swift */,
+				271C2BF82C8CE9DC00D746A4 /* NavigationStackRootView.swift */,
+				271C2BF92C8CE9DC00D746A4 /* RegisterSegueModifier.swift */,
+			);
+			name = NavigationCoordinator;
+			path = ../../Sources/NavigationCoordinator;
+			sourceTree = "<group>";
+		};
 		2730D5E72BDFEB8A00DB4FF6 = {
 			isa = PBXGroup;
 			children = (
-				27E81BF12C8CD38900239737 /* NavigationCoordinator */,
 				2730D5F22BDFEB8A00DB4FF6 /* Navigation */,
 				2730D6202BDFEDBC00DB4FF6 /* NavigationUnitTests */,
 				2730D62D2BDFEDCA00DB4FF6 /* NavigationUITests */,
@@ -111,6 +124,7 @@
 		2730D5F22BDFEB8A00DB4FF6 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				271C2BFA2C8CE9DC00D746A4 /* NavigationCoordinator */,
 				2730D60A2BDFEBEA00DB4FF6 /* Other */,
 				2730D6072BDFEBEA00DB4FF6 /* Views */,
 				2730D5F32BDFEB8A00DB4FF6 /* MainApp.swift */,
@@ -183,7 +197,6 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
-				27E81BF32C8CD39B00239737 /* NavigationCoordinator */,
 			);
 			productName = Navigation;
 			productReference = 2730D5F02BDFEB8A00DB4FF6 /* Navigation.app */;
@@ -260,7 +273,6 @@
 			);
 			mainGroup = 2730D5E72BDFEB8A00DB4FF6;
 			packageReferences = (
-				27E81BF22C8CD39B00239737 /* XCLocalSwiftPackageReference "NavigationCoordinator" */,
 			);
 			productRefGroup = 2730D5F12BDFEB8A00DB4FF6 /* Products */;
 			projectDirPath = "";
@@ -308,11 +320,14 @@
 				2730D60F2BDFEBEA00DB4FF6 /* RedBookView.swift in Sources */,
 				27EE16C32C8C96C6008A1247 /* Types.swift in Sources */,
 				2730D6112BDFEBEA00DB4FF6 /* View+Ext.swift in Sources */,
+				271C2BFC2C8CE9DC00D746A4 /* NavigationStackRootView.swift in Sources */,
 				2730D5F42BDFEB8A00DB4FF6 /* MainApp.swift in Sources */,
 				2730D6192BDFEC4A00DB4FF6 /* Screen.swift in Sources */,
 				2730D6102BDFEBEA00DB4FF6 /* AccessibilityID.swift in Sources */,
 				2730D60C2BDFEBEA00DB4FF6 /* BlueBookView.swift in Sources */,
+				271C2BFB2C8CE9DC00D746A4 /* NavigationCoordinator.swift in Sources */,
 				2730D60E2BDFEBEA00DB4FF6 /* OrangeBookView.swift in Sources */,
+				271C2BFD2C8CE9DC00D746A4 /* RegisterSegueModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,20 +663,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		27E81BF22C8CD39B00239737 /* XCLocalSwiftPackageReference "NavigationCoordinator" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = NavigationCoordinator;
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		27E81BF32C8CD39B00239737 /* NavigationCoordinator */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NavigationCoordinator;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2730D5E82BDFEB8A00DB4FF6 /* Project object */;
 }

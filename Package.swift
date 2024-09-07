@@ -17,10 +17,15 @@ let package = Package(
             targets: ["NavigationCoordinator"]),
     ],
     targets: [
-        .target(
-            name: "NavigationCoordinator"),
-        .testTarget(
-            name: "NavigationCoordinatorTests",
-            dependencies: ["NavigationCoordinator"]),
-    ]
+            .target(
+                name: "NavigationCoordinator",
+                path: "Sources/NavigationCoordinator",
+                exclude: ["../../TestApp"]
+            ),
+            .testTarget(
+                name: "NavigationCoordinatorTests",
+                dependencies: ["NavigationCoordinator"],
+                path: "Tests/NavigationCoordinatorTests"
+            ),
+        ]
 )

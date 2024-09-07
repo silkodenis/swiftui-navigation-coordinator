@@ -15,7 +15,7 @@
  */
 
 import SwiftUI
-import NavigationCoordinator
+//import NavigationCoordinator
 
 enum Screen {
     case orangeBook

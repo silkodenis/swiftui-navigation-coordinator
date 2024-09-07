@@ -1,4 +1,4 @@
-import NavigationCoordinator
+//import NavigationCoordinator
 
 typealias SegueModifier = RegisterSegueModifier<Screen>
 typealias Coordinator = NavigationCoordinator<Screen>

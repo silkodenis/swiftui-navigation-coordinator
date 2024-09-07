@@ -7,7 +7,7 @@
 
 import XCTest
 @testable import Navigation
-@testable import NavigationCoordinator
+//@testable import NavigationCoordinator
 
 final class NavigationCoordinatorTests: XCTestCase {
     var sut: Coordinator!

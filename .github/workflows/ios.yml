@@ -28,10 +28,10 @@ jobs:
       run: sudo xcode-select -s /Applications/Xcode_15.3.app/Contents/Developer
         
     - name: Set up code signing
-      run: ruby -r xcodeproj -e 'project = Xcodeproj::Project.open("Navigation.xcodeproj"); target = project.targets.first; target.build_configuration_list.build_configurations.each { |config| config.build_settings["CODE_SIGN_STYLE"] = "Automatic" }; project.save'
+      run: ruby -r xcodeproj -e 'project = Xcodeproj::Project.open("Example/Navigation.xcodeproj"); target = project.targets.first; target.build_configuration_list.build_configurations.each { |config| config.build_settings["CODE_SIGN_STYLE"] = "Automatic" }; project.save'
           
     - name: Build project
-      run: xcodebuild -project Navigation.xcodeproj -scheme Navigation -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15 Pro' clean build | xcpretty
+      run: xcodebuild -project Example/Navigation.xcodeproj -scheme Navigation -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15 Pro' clean build | xcpretty
 
     - name: Run tests
-      run: xcodebuild test -scheme Navigation -project Navigation.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 15 Pro' | xcpretty && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme Navigation -project Example/Navigation.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 15 Pro' | xcpretty && exit ${PIPESTATUS[0]}
