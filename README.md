@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/github/license/silkodenis/swiftui-navigation-coordinator.svg)](https://github.com/silkodenis/swiftui-navigation-coordinator/blob/main/LICENSE)
-![IOS](https://github.com/silkodenis/swiftui-navigation-coordinator/actions/workflows/ios.yml/badge.svg?branch=main)
+![swift](https://github.com/silkodenis/swiftui-navigation-coordinator/actions/workflows/swift.yml/badge.svg?branch=main)
 
 # SwiftUI Navigation Coordinator
 
