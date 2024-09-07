@@ -36,11 +36,82 @@ The current implementation covers 6 main transitions:
 
 ## Requirements
 
-- iOS 16.0+
+- **iOS**: iOS 16.0+
+- **macOS**: macOS 13.0+
+- **watchOS**: watchOS 9.0+
+- **tvOS**: tvOS 16.0+
+
+## To add the package to your project, use Swift Package Manager:
+
+1. Open Xcode and select “File” > “Add Packages…”
+2. Enter the URL of the package repository.
+3. Follow the instructions to complete the installation.
 
 ## Why This Is Interesting
 - The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
 - In addition to the specific task of multi-level return, the `unwind()` can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. The `onUnwind()` call will always be made before the `onAppear()` call.
+
+## Getting Started After Adding a Package
+
+<details>
+<summary><b>1. Configure the NavigableScreen Enum</b></summary>
+  
+Start by creating an enum Screen to represent the different screens in your app. Ensure it conforms to the NavigableScreen protocol:
+
+```swift
+import NavigationCoordinator
+
+enum Screen {
+    case login
+    case movies
+    case settings
+}
+
+extension Screen: NavigableScreen {
+    @ViewBuilder
+    var view: some View {
+        switch self {
+        case .login: LoginView()
+        case .movies: MoviesView()
+        case .settings: SettingsView()
+        }
+    }
+}
+```
+</details>
+
+<details>
+<summary><b>2. Define Typealiases</b></summary>
+  
+Define typealias to simplify the usage of the types used with your coordinator:
+
+```swift
+import NavigationCoordinator
+
+typealias SegueModifier = RegisterSegueModifier<Screen>
+typealias Coordinator = NavigationCoordinator<Screen>
+typealias RootView = NavigationStackRootView<Screen>
+```
+</details>
+
+<details>
+<summary><b>3. Configure the App Entry Point</b></summary>
+  
+Set up the app entry point using the RootView to define the initial screen:
+
+```swift
+import SwiftUI
+
+@main
+struct MainApp: App {
+    var body: some Scene {
+        WindowGroup {
+            RootView(.login)
+        }
+    }
+}
+```
+</details>
 
 ## Usage Examples
 
@@ -48,12 +119,12 @@ The current implementation covers 6 main transitions:
 <summary><b>Push</b></summary>
 
 ```swift
-struct SomeView: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+struct LoginView: View {
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         Button("info") {
-            coordinator.push(.info)
+            coordinator.push(.movies)
         }
     }
 }
@@ -64,8 +135,8 @@ struct SomeView: View {
 <summary><b>Pop</b></summary>
 
 ```swift
-struct SomeView: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+struct MoviesView: View {
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         Button("back") {
@@ -80,8 +151,8 @@ struct SomeView: View {
 <summary><b>PopToRoot</b></summary>
 
 ```swift
-struct SomeView: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+struct SettingsView: View {
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         Button("login") {
@@ -102,7 +173,7 @@ Use a unique identifier for your unwind segues. If a segue becomes no longer rel
 // B View
 // 🟦🟦🅰🟦🟦🟦🟦🟦🟦🅱️  
 struct B: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         Button("pop to A") {
@@ -133,7 +204,7 @@ struct A: View {
 [ ][ ][ ][ ][ ][A]
 */
 struct A: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         Button("present") {
@@ -153,7 +224,7 @@ struct A: View {
 [ ][ ][ ][ ][ ][A]
 */
 struct CL: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         Button("dismiss") {
@@ -166,7 +237,7 @@ struct CL: View {
 [ ][ ][ ][ ][ ][A]
 */
 struct A: View {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
+    @EnvironmentObject var coordinator: Coordinator
     
     var body: some View {
         VStack {}
@@ -178,135 +249,9 @@ struct A: View {
 ```
 </details>
 
-## Using into Your Project
-Add [NavigationCoordinator](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Navigation/Navigation/NavigationCoordinator.swift) to your project.
-
-<details>
-<summary><b>Configure the App to start with `RootView` as the initial view.</b></summary>
-
-```swift
-import SwiftUI
-
-struct RootView: View {
-    @ObservedObject private var coordinator: NavigationCoordinator<Screen>
-    private let root: Screen
-    
-    internal init(_ root: Screen, withParent coordinator: NavigationCoordinator<Screen>? = nil) {
-        self.root = root
-        self.coordinator = NavigationCoordinator<Screen>()
-        self.coordinator.parent = coordinator
-    }
-    
-    var body: some View {
-        NavigationStack(path: $coordinator.path) {
-            root.view
-                .navigationDestination(for: Screen.self) { screen in
-                    screen.view
-                }
-        }
-        .sheet(item: $coordinator.modal) { screen in
-            RootView(screen, withParent: coordinator)
-        }
-        .environmentObject(coordinator)
-    }
-}
-```
-
-```swift
-import SwiftUI
-
-@main
-struct SomeApp: App {
-    var body: some Scene {
-        WindowGroup {
-            RootView(.login)
-        }
-    }
-}
-```
-</details>
-
-<details>
-<summary><b>Configure the `NavigableScreen` for your project.</b></summary>
-
-In the view property, I recommend avoiding direct View initialization. Instead, use your preferred Dependency Injection pattern, such as **View Factory**, to externally connect various dependencies to your **ViewModel**.
-
-```swift
-import SwiftUI
-
-// Example
-
-enum Screen {
-    case login
-    case movies
-    case detail(id: Int)
-    case info
-    
-    /// Used to uniquely identify segues that either navigate back to a previous screen or dismiss a modal view.
-    static let toDetail = "toDetail"
-    static let toMovies = "toMovies"
-}
-
-extension Screen: NavigableScreen {
-    // You can set up DI in this property
-    @ViewBuilder
-    var view: some View {
-        switch self {
-        case .login:
-            viewFactory.makeLoginView()
-            
-        case .movies:
-            viewFactory.makeMoviesView()
-            
-        case .detail(let id):
-            viewFactory.makeDetailView(id)
-            
-        case .info:
-            viewFactory.makeInfoView()
-        }
-    }
-}
-```
-</details>
-
-<details>
-<summary><b>Finally, add the `RegisterSegueModifier` to your project.</b></summary>
-
-To implement the `onUnwind()` and `onDismiss()` calls in your views, similar to how `onAppear()` is used.
-
-```swift
-import SwiftUI
-
-struct RegisterSegueModifier: ViewModifier {
-    @EnvironmentObject var coordinator: NavigationCoordinator<Screen>
-    
-    let type: NavigationCoordinator<Screen>.Segue.SegueType
-    let identifier: String
-    let action: ((Any?) -> Void)?
-    
-    func body(content: Content) -> some View {
-        content.onAppear {
-            coordinator.registerSegue(type, with: identifier, action: action)
-        }
-    }
-}
-
-extension View {
-    func onUnwind(segue identifier: String, perform action: ((Any?) -> Void)? = nil) -> some View {
-        modifier(RegisterSegueModifier(type: .unwind, identifier: identifier, action: action))
-    }
-    
-    func onDismiss(segue identifier: String, perform action: ((Any?) -> Void)? = nil) -> some View {
-        modifier(RegisterSegueModifier(type: .dismiss, identifier: identifier, action: action))
-    }
-}
-```
-</details>
-
-Feel free to take it, modify it, and use it as you see fit.
-
-## Examples
-- [SwiftUI App](https://github.com/silkodenis/swiftui-moviesdb-redux-app)
+## Project examples
+- [Original Example](https://github.com/silkodenis/swiftui-navigation-coordinator/tree/main/Example)
+- [SwiftUI Redux TMDB Demo App](https://github.com/silkodenis/swiftui-moviesdb-redux-app)
 
 ## Reporting Issues
 
