@@ -34,6 +34,10 @@ The current implementation covers 6 main transitions:
 
 </details>
 
+## Why This Is Interesting
+- The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
+- In addition to the specific task of multi-level return, the `unwind()` can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. The `onUnwind()` call will always be made before the `onAppear()` call.
+
 ## Requirements
 
 - **iOS**: iOS 16.0+
@@ -46,10 +50,6 @@ The current implementation covers 6 main transitions:
 1. Open Xcode and select “File” > “Add Packages…”
 2. Enter the URL of the package repository.
 3. Follow the instructions to complete the installation.
-
-## Why This Is Interesting
-- The implementation of the `unwind` transition may be of particular interest to those who have already attempted to create similar transitions in SwiftUI.
-- In addition to the specific task of multi-level return, the `unwind()` can also be used instead of the usual `pop()` when it is necessary to pass data back to the previous screen. The `onUnwind()` call will always be made before the `onAppear()` call.
 
 ## Getting Started
 
