@@ -61,6 +61,7 @@ enum Screen {
     case login
     case movies
     case settings
+    // etc.
 }
 
 extension Screen: NavigableScreen {
